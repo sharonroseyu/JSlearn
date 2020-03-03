@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文字列表实现无缝滚动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+            color: #fff;
+            line-height: 40px;
+            white-space: nowrap;
+            font-size: 14px
+        }
+
+        #list1 {
+            padding: 0 20px;
+        }
+
+        #list2 {
+            padding: 0 20px;
+        }
+
+        #box {
+            width: 400px;
+            height: 200px;
+            overflow: hidden;
+            border-color: black;
+            border-style: solid;
+            border-bottom-width: 10px;
+            border-top-width: 10px;
+            background-color: black
+        }
+
+        #section {
+            width: 600px;
+            height: 600px;
+            border: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="section">
+        <div id="box">
+            <ul id="list1">
+                <li>星期一 -- 风急天高猿啸哀，渚清沙白鸟飞回。</li>
+                <li>星期二 -- 无边落木萧萧下，不尽长江滚滚来。</li>
+                <li>星期三 -- 万里悲秋常作客，百年多病独登台。</li>
+                <li>星期四 -- 艰难苦恨繁霜鬓，潦倒新停浊酒杯。</li>
+                <li>星期五 -- 艰难苦恨繁霜鬓，潦倒新停浊酒杯。</li>
+                <li>星期六 -- 无边落木萧萧下，不尽长江滚滚来。</li>
+                <li>星期天 -- 风急天高猿啸哀，渚清沙白鸟飞回。</li>
+            </ul>
+            <ul id="list2"></ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var box = document.getElementById("box");
+        var l1 = document.getElementById("list1");
+        console.log(l1.offsetHeight)
+        var l2 = document.getElementById("list2");
+        l2.innerHTML = l1.innerHTML;//克隆list1的数据，使得list2和list1的数据一样
+        function scrollup() {
+            if (box.scrollTop >= l1.offsetHeight) { //滚动条距离顶部的值恰好等于list1的高度时，达到滚动临界点，此时将让scrollTop=0,让list1回到初始位置，实现无缝滚动
+                box.scrollTop = 0;
+            } else {
+                box.scrollTop++;
+            }
+        }
+        setInterval(scrollup, 200); //数值越大，滚动速度越慢
+    </script>
+</body>
+
+</html>

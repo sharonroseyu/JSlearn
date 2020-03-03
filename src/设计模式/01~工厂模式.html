@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计模式 ~ 工厂模式</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">
+                Array.flat(n)是ES10扁平数组的api,n表示维度,n值为Infinity时维度为无限大
+            </h3>
+            <pre class="code">
+            {
+                console.log(`数组扁平化 ： `, [1,[2,3]].flat(2))  // [1,2,3]
+                console.log(`数组扁平化 ： `, [10,[20,10,[40,20]]].flat(3))  // [10, 20, 10, 40, 20]
+                console.log(`数组扁平化 ： `, [10,[20,13,[14,35]]].toString() )  //  10,20,13,14,35
+            }        
+            </pre>
+        </section>
+    </div>
+
+    <script>
+        function fn(init){
+            return function ff(num){
+                return init + num
+            }
+        }
+        var s = fn(100)
+        console.log(s)
+        var res = s(111)
+        console.log(res)
+        // 定义：工厂模式又叫静态工厂方法，就是创建对象，并赋予属性和方法
+        // {
+        //     let Factory = function(params){
+        //         function Info(option){
+        //             this.name = option.name;
+        //             this.age = option.age;
+        //         }
+        //         switch(params){
+        //             case 'superAdmin':
+        //                 return new Info(superAdmin);
+        //                 break;
+
+        //             case 'Admin':
+        //                 return new Info(admin);
+        //                 break;
+
+        //             case 'generalUser':
+        //                 return new Info(generalUser);
+        //                 break;
+                    
+        //             default:
+        //                 throw new Error('传递的参数错误, 可选参数:superAdmin、admin、generalUser')
+        //         }
+        //     }
+
+        //     // 调用
+        //     let superAdmin = Factory('superAdmin')
+        //     let admin = Factory('admin')
+        //     let generalUser = Factory('generalUser')
+        //     console.log(superAdmin('superAdmin',12))
+        // }
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象的遍历</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <section class="sec">
+            <h3 class="title">for ... in  遍历对象自身的和继承的可枚举属性(不含Symbol属性)</h3>
+            <pre class="code">
+                let obj = {
+                    brand: "奔驰",
+                    color: "red"
+                }
+                let weight = Symbol("red")
+                obj[weight] = "1000kg"
+                console.log(obj)
+                for (let key in obj) {
+                    console.log("for ... in  遍历对象 : ",obj[key]) // 奔驰 red
+                }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">Object.keys(obj) 返回一个数组,包括对象自身的(不含继承的)所有可枚举属性(不含Symbol属性)</h3>
+            <pre class="code">
+                var objkey = {
+                    brand: "BMW",
+                    speed : "200km/h",
+                    run:()=>{
+                        console.log(`这辆${this.brand}车的速度是${this.speed}`)
+                    }
+                }
+                let seat = Symbol("seat")
+                objkey[seat] = "4 座"
+                console.log(objkey)  // {brand: "BMW", speed: "200km/h", Symbol(seat): "4 座", run: ƒ}
+                console.log(Object.keys(objkey)) // ["brand", "speed", "run"]
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">Object.getOwnPropertyNames(obj) 返回一个数组,包括对象自身的所有可枚举属性(不含Symbol属性)</h3>
+            <pre class="code">
+                var objPro = {
+                    brand: "BMW",
+                    speed : "200km/h",
+                    run:()=>{
+                        console.log(`这辆${this.brand}车的速度是${this.speed}`)
+                    }
+                }
+                let price = Symbol("price")
+                objPro[price] = "300000元",
+                console.log(objPro)  // {brand: "BMW", speed: "200km/h", Symbol(price): "300000元", run: ƒ}
+                console.log(Object.getOwnPropertyNames(objPro)) // ["brand", "speed", "run"]
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">Object.getOwnPropertySymbols(obj) 返回一个数组,包含对象自身的所有Symbol属性</h3>
+            <pre class="code">
+                let objSym = {
+                    seat: 4,
+                    drive: "四驱"
+                }
+                let brand = Symbol("brand")
+                let color = Symbol("color")
+                objSym[brand] = "大众 捷达"
+                objSym[color] = "white"
+                console.group("遍历 getOwnPropertySymbols : ")
+                console.log(objSym) // {seat: 4, drive: "四驱", Symbol(brand): "大众 捷达", Symbol(color): "white"}
+                console.log("getOwnPropertySymbols : ",Object.getOwnPropertySymbols(objSym))  //  [Symbol(brand), Symbol(color)]
+                console.log(Object.getOwnPropertyNames(objSym))  //  ["seat", "drive"] 
+                console.log(Object.keys(objSym))  // ["seat", "drive"]
+                
+                console.groupEnd()
+            </pre>
+        </section>
+
+    </div>
+    <script>
+        // for ... in  遍历对象自身的和继承的可枚举属性(不含Symbol属性)
+        {
+            let obj = {
+                brand: "奔驰",
+                color: "red"
+            }
+            let weight = Symbol("red")
+            obj[weight] = "1000kg"
+            console.log(obj)
+            for (let key in obj) {
+                console.log("for ... in  遍历对象 : ",obj[key]) // 奔驰 red
+            }
+        }
+
+        // Object.keys(obj) 返回一个数组,包括对象自身的(不含继承的)所有可枚举属性(不含Symbol属性)
+        {
+            var objkey = {
+                brand: "BMW",
+                speed : "200km/h",
+                run:()=>{
+                    console.log(`这辆${this.brand}车的速度是${this.speed}`)
+                }
+            }
+            let seat = Symbol("seat")
+            objkey[seat] = "4 座"
+            console.log(objkey)  // {brand: "BMW", speed: "200km/h", Symbol(seat): "4 座", run: ƒ}
+            console.log(Object.keys(objkey)) // ["brand", "speed", "run"]
+        }
+
+        // Object.getOwnPropertyNames(obj) 返回一个数组,包括对象自身的所有可枚举属性(不含Symbol属性)
+        {
+            var objPro = {
+                brand: "BMW",
+                speed : "200km/h",
+                run:()=>{
+                    console.log(`这辆${this.brand}车的速度是${this.speed}`)
+                }
+            }
+            let price = Symbol("price")
+            objPro[price] = "300000元",
+            console.group("getOwnPropertyNames")
+            console.log(objPro)  // {brand: "BMW", speed: "200km/h", Symbol(price): "300000元", run: ƒ}
+            console.log(Object.getOwnPropertyNames(objPro)) // ["brand", "speed", "run"]
+            console.groupEnd()
+        }
+        
+
+        // Object.getOwnPropertySymbols(obj) 返回一个数组,包含对象自身的所有Symbol属性
+        {
+            let objSym = {
+                seat: 4,
+                drive: "四驱"
+            }
+            let brand = Symbol("brand")
+            let color = Symbol("color")
+            objSym[brand] = "大众 捷达"
+            objSym[color] = "white"
+            console.group("遍历 getOwnPropertySymbols : ")
+            console.log(objSym) // {seat: 4, drive: "四驱", Symbol(brand): "大众 捷达", Symbol(color): "white"}
+            console.log("getOwnPropertySymbols : ",Object.getOwnPropertySymbols(objSym))  //  [Symbol(brand), Symbol(color)]
+            console.log(Object.getOwnPropertyNames(objSym))  //  ["seat", "drive"] 
+            console.log(Object.keys(objSym))  // ["seat", "drive"]
+            console.log(Reflect.ownKeys(objSym)) // ["seat", "drive", Symbol(brand), Symbol(color)]
+            // console.log(Reflect.enumerate(objSym)) //  Reflect.enumerate is not a function
+            console.groupEnd()
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_732107_zen5d34osxl.css" />
+        <style type="text/css">
+
+			li {
+				list-style: none;
+				background-color: #1b1a1a;
+				color: #efefef;
+				line-height: 40px;
+                cursor: pointer;
+            }
+			li div {
+				padding: 0px 10px;
+			}
+			li div:hover {
+				background-color: red;
+				color: #fff;
+				box-shadow: 0 0 10px rgba(0,0,0,0.8);
+                text-shadow: 0 0 2px rgba(255,255,255,0.8);
+			}
+			ul {
+				padding-left: 0;
+				width: 300px;
+				overflow: hidden;
+			}
+			
+			.qf {
+				float: right;
+				padding-right: 10px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="menu-box">
+
+		</div>
+
+		<!-- <ul>
+			<li>
+				<div>一级菜单  <i class="qf qf-shop-jianhao"></i></div>
+				<ul>
+					<li>
+						<div>二级菜单</div>
+					</li>
+					<li>
+						<div>二级菜单</div>
+					</li>
+					<li>
+						<div>二级菜单 <i class="qf qf-shop-jianhao"></i></div>
+						<ul>
+							<li><div>三级菜单 </div></li>
+							<li><div>三级菜单 </div></li>
+							<li><div>三级菜单 </div></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<div> 一级菜单 <i class="qf qf-shop-jianhao"></i></div>
+				<ul >
+					<li>
+						<div>二级菜单 <i class="qf qf-shop-jianhao"></i></div>
+						<ul >
+							<li><div>三级菜单 </div></li>
+							<li><div>三级菜单 </div></li>
+						</ul>
+					</li>
+				</ul>
+            </li>
+		</ul> -->
+
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script src="js/menu.js"></script>
+		<script type="text/javascript">
+		//  $(document).ready(function() {
+
+		//  })
+		$(function() {
+			// 等价于window.onload
+			// dom元素加载成功以后,就执行
+			// 一个文件中可以写多个
+			menu3.init()
+		})
+
+		// 只会执行一次
+		// window.onload = function() {
+		// 	// 页面资源加载完成以后， 执行函数
+		// }
+		</script>
+	</body>
+</html>

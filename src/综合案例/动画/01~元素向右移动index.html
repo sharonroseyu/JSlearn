@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        #box{
+            width: 100px; height: 100px; color: #fff; background: #000; line-height: 100px; position:absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <div id = "box">BOX</div>
+
+    <script>
+
+        const $box = document.querySelector("#box")
+        $box.onclick = function(){
+            let initval = parseInt(window.getComputedStyle($box,null)["left"])
+            console.log(`打印元素的初始值 ： %s`,initval)
+            let timer = setInterval(()=>{
+                initval ++;
+                $box.style.left = initval + `px`
+                if(initval >= 100){
+                    initval = 100
+                    clearInterval(timer)
+                }
+            },10)
+        }
+
+        function getStyle(htmlObj,attr){
+            if(window.getComputedStyle){
+                return window.getComputedStyle(htmlObj,null)[attr]
+            }else{ // 兼容 ie 浏览器
+                obj.currentStyle[attr]
+            }
+        }
+
+        
+
+    </script>
+    
+</body>
+</html>

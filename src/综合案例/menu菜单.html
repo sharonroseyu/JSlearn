@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手风琴菜单</title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        #root>ul{
+            width: 300px;
+        }
+        li {
+            list-style: none;  background-color: #1b1a1a; color: #efefef; line-height: 40px;  cursor: pointer; font-size: 14px;
+        }
+        li div:hover{
+            background-color: orange; color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        var data = [
+            { key:1000,name:"大陆歌手",children:[
+                {key:10011,name:"大陆男歌手",children:[
+                    {key:100111,name:"屠洪刚"},
+                    {key:100111,name:"孙楠"},
+                    {key:100111,name:"韩磊"}
+                ]},
+                {key:10011,name:"大陆女歌手",children:[
+                    {key:100111,name:"韩红"},
+                    {key:100111,name:"孙露"},
+                    {key:100111,name:"宋祖英"}
+                ]}
+            ]},
+            {
+                key:1002,name:"港台歌手",children:[
+                    { key : 10021,name: "港台男歌手", children : [
+                        {key:100111,name:"张国荣"},
+                        {key:100111,name:"刘德华"},
+                        {key:100111,name:"张学友"}
+                    ]},
+                    { key : 10022,name: "港台女歌手", children : [
+                        {key:100111,name:"梅艳芳"},
+                        {key:100111,name:"邓丽君"},
+                        {key:100111,name:"杨千嬅"},
+                        {key:100111,name:"容祖儿"},
+                        {key:100111,name:"王菲"},
+                    ]}
+                ]
+            },
+            {
+                key: 1003 , name : "欧美歌手", children:[
+                    { key : 10022,name: "欧美男歌手", children : [
+                        {key:100111,name:"迈克尔杰克逊"},
+                        {key:100111,name:"林肯公园"}
+                    ]},
+                    { key : 10022,name: "欧美女歌手", children : [
+                        {key:100111,name:"ladygaga"},
+                        {key:100111,name:"布兰妮"}
+                    ]}
+                ]
+            },
+            {
+                key: 1003 , name : "日韩歌手", children:[
+                    { key : 10022,name: "日韩男歌手", children : [
+                        {key:100111,name:"高耀太"},
+                        {key:100111,name:"rain"}
+                    ]},
+                    { key : 10022,name: "日韩女歌手", children : [
+                        {key:100111,name:"李孝利"},
+                        {key:100111,name:"蔡妍"}
+                    ]}
+                ]
+            },
+            {
+                key: 1004 , name: "其它歌手"
+            }
+        ]
+        // 获取页面容器元素
+        var root = document.getElementById("root");
+        console.log(root)
+        renderdom(data,root,20)
+        function renderdom(data,root,padding){
+            console.log("faterNode : ",root)
+            var $ul = document.createElement("ul");
+            data.forEach((item)=>{
+                var $li = document.createElement("li");
+                var $div = document.createElement("div")
+                $div.innerHTML = item.name;
+                $div.style.paddingLeft = padding + "px"
+                $li.append($div)
+                $ul.append($li)
+                // 如果含有子集
+                if(item.children){
+                    var $i = document.createElement("i")
+                    $i.innerHTML = "-"
+                    $div.append($i)
+                    renderdom(item.children,$li,padding + 20 )
+                }
+            })
+            root.append($ul)
+        }
+        function fn(m,n,dom){
+            console.log(m,n,dom)
+        }
+        fn(5,6,root)
+    </script>
+</body>
+</html>

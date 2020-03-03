@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象 ~ 对象的拷贝~浅拷贝 </title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <section class="sec">
+            <h3 class="title">直接把对象赋值给另一个对象时，两个对象都指向同一个堆内存地址</h3>
+            <pre class="code">
+                {
+                    var obj1  = {
+                        userId : "10001",
+                        userName : "范进",
+                        hobby:["抽烟","喝酒","大保健"],
+                        sayHello : ()=>{
+                            console.log(`hello , my  name is ${this.name}`)
+                        },
+                    }
+        
+                    var obj2 = obj1;
+                    console.group(`直接把对象赋值给另一个对象`)
+                    console.log("obj2 : ",obj2)
+                    // 修改 userName 属性
+                    obj2.userName = "吴泾镇"
+                    console.log("obj2: ", obj2)
+                    console.log("obj1: ", obj1)
+                    console.log(obj1 === obj2)  // true
+                    console.groupEnd()
+                }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">浅复制 ~ Object.assign({},obj) Object.assign()原用于是合并多个对象，注意浅复制时的用法</h3>
+            <pre class="code">
+                {
+                    var obj3  = {
+                        userId : "10001",
+                        userName : "章邯",
+                        hobby:["抽烟","喝酒","大保健"],
+                        sayHello : ()=>{
+                            console.log(`hello , my  name is ${this.name}`)
+                        },
+                    }
+        
+                    var obj4 = Object.assign({},obj3);
+                    console.group("对象的浅复制 ~ Object.assign()")
+                    console.log("obj4 : ",obj4)
+                    // 修改 userName 属性
+                    obj4.userName = "项羽"
+                    console.log("obj4: ", obj4)
+                    console.log("obj3: ", obj3)
+                    console.log(obj3 === obj4)  // false
+                    // 第一层复制修改对象的值不相互影响
+                    console.log("obj3.userName: " ,obj3.userName) // 章邯
+                    console.log("obj4.userName: " ,obj4.userName)  // 项羽
+                    // 测试更深层的对象
+                    obj4.hobby[0] = "学习";
+                    obj4.hobby[1] = "再学习";
+                    obj4.hobby[2] = "仍旧学习";
+                    console.log(`查看两个对象的hobby ：${obj3.hobby}  ====== ${obj4.hobby}`)
+                    // 学习,再学习,仍旧学习  ====== 学习,再学习,仍旧学习
+                    console.log(`查看两个对象的hobby ：`, obj3.hobby  === obj4.hobby)  //  true
+                    // 因此使用此方法拷贝，只是把对象的第一层进行了复制
+                    console.groupEnd()        
+                }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">使用 for 循环的浅复制</h3>
+            <pre class="code">
+                {
+                    var obj5  = {
+                        userId : "10001",
+                        userName : "某某",
+                        hobby:["跳舞","唱歌","练习武术"],
+                        sayHello : ()=>{
+                            console.log(`hello , my  name is ${this.name}`)
+                        },
+                    }
+        
+                    var obj6 = {}
+                    for(let i in obj5){
+                        obj6[i] = obj5[i]
+                    }            
+                    console.group(`for 循环进行浅复制`)
+                    console.log(obj6)
+                    obj6.userName = `无名`
+                    console.log(obj5,obj6)  // 查看结果，userName 属性值已经不相互影响了
+                    obj6.hobby[0] = `恰似一江春水向东流`
+                    console.log(obj5.hobby, obj6.hobby) 
+                    // ["恰似一江春水向东流", "唱歌", "练习武术"], ["恰似一江春水向东流", "唱歌", "练习武术"]
+                    console.log(obj5.hobby === obj6.hobby)  // true
+                    // 由以上两个打印结果可见，在深层的对象中还是引用同一个地址，值还是相互影响的
+                    console.groupEnd()
+                }        
+            </pre>
+        </section>
+        
+    </div>
+    <script>
+        // 直接把对象赋值给另一个对象时，两个对象都指向同一个堆内存地址
+        {
+            var obj1  = {
+                userId : "10001",
+                userName : "范进",
+                hobby:["抽烟","喝酒","大保健"],
+                sayHello : ()=>{
+                    console.log(`hello , my  name is ${this.name}`)
+                },
+            }
+
+            var obj2 = obj1;
+            console.group(`直接把对象赋值给另一个对象`)
+            console.log("obj2 : ",obj2)
+            // 修改 userName 属性
+            obj2.userName = "吴泾镇"
+            console.log("obj2: ", obj2)
+            console.log("obj1: ", obj1)
+            console.log(obj1 === obj2)  // true
+            console.groupEnd()
+        }
+
+        // 浅复制 ~ Object.assign({},obj)
+        {
+            var obj3  = {
+                userId : "10001",
+                userName : "章邯",
+                hobby:["抽烟","喝酒","大保健"],
+                sayHello : ()=>{
+                    console.log(`hello , my  name is ${this.name}`)
+                },
+            }
+
+            var obj4 = Object.assign({},obj3);
+            console.group("对象的浅复制 ~ Object.assign()")
+            console.log("obj4 : ",obj4)
+            // 修改 userName 属性
+            obj4.userName = "项羽"
+            console.log("obj4: ", obj4)
+            console.log("obj3: ", obj3)
+            console.log(obj3 === obj4)  // false
+            // 第一层复制修改对象的值不相互影响
+            console.log("obj3.userName: " ,obj3.userName) // 章邯
+            console.log("obj4.userName: " ,obj4.userName)  // 项羽
+            // 测试更深层的对象
+            obj4.hobby[0] = "学习";
+            obj4.hobby[1] = "再学习";
+            obj4.hobby[2] = "仍旧学习";
+            console.log(`查看两个对象的hobby ：${obj3.hobby}  ====== ${obj4.hobby}`)
+            // 学习,再学习,仍旧学习  ====== 学习,再学习,仍旧学习
+            console.log(`查看两个对象的hobby ：`, obj3.hobby  === obj4.hobby)  //  true
+            // 因此使用此方法拷贝，只是把对象的第一层进行了复制
+            console.groupEnd()
+
+        }
+        
+        // for 循环的浅复制
+        {
+            var obj5  = {
+                userId : "10001",
+                userName : "某某",
+                hobby:["跳舞","唱歌","练习武术"],
+                sayHello : ()=>{
+                    console.log(`hello , my  name is ${this.name}`)
+                },
+            }
+
+            var obj6 = {}
+            for(let i in obj5){
+                obj6[i] = obj5[i]
+            }            
+            console.group(`for 循环进行浅复制`)
+            console.log(obj6)
+            obj6.userName = `无名`
+            console.log(obj5,obj6)  // 查看结果，userName 属性值已经不相互影响了
+            obj6.hobby[0] = `恰似一江春水向东流`
+            console.log(obj5.hobby, obj6.hobby) 
+            // ["恰似一江春水向东流", "唱歌", "练习武术"], ["恰似一江春水向东流", "唱歌", "练习武术"]
+            console.log(obj5.hobby === obj6.hobby)  // true
+            // 由以上两个打印结果可见，在深层的对象中还是引用同一个地址，值还是相互影响的
+            console.groupEnd()
+        }
+        
+
+    </script>
+</body>
+</html>

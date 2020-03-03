@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象的声明方法</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <section class="sec">
+            <h3 class="title">字面量方法声明的对象</h3>
+            <pre class="code">
+                var obj = {name:"Lili",age:12}
+                console.log(obj)
+                console.log("obj.__proto__ : ",obj.__proto__)
+                console.log("obj.__proto__.name : ",obj.__proto__.name) //  undefined
+                console.log("obj.__proto__.constructor : ",obj.__proto__.constructor) // Object() { [native code]}
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">构造函数方法声明的对象</h3>
+            <pre class="code">
+                var obj1 = new Object({name:"Lili",y:13});
+                console.log(obj1); 
+                console.log(obj1.name); //Lili
+                console.log(obj1.__proto__.name); // undefined
+                console.log(obj1.__proto__.name === obj1.name); // false
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">内置方法 Object.create 方法声明的对象</h3>
+            <pre class="code">
+                let obj2 = Object.create({color:"red",seed: "133km/h"})
+                console.log(obj2) // {}
+                console.log(obj2.__proto__)  // {color: "red", seed: "133km/h"}
+                console.log(obj2.color)  // red
+                console.log(obj2.__proto__.color )  // red
+                console.log(obj2.__proto__.color === obj2.color )  // true
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">以上三种方法的优缺点</h3>
+            <pre class="code">
+                1.功能:都能实现对象的声明,并能够赋值和取值
+                2.继承性:内置方法创建的对象继承到__proto__属性上
+                3.隐藏属性:三种声明方法会默认为内部的每个成员（属性或方法）生成一些隐藏属性，这些隐藏属性是可以读取和可配置的,属性分类见下面
+                4.属性读取:Object.getOwnPropertyDescriptor()或getOwnPropertyDescriptor()
+                5.属性设置:Object.definePropertype或Object.defineProperties
+            </pre>
+        </section>
+    
+    </div>
+
+    <script>
+        // 字面量方法
+        {
+            var obj = {name:"Lili",age:12}
+            console.log(obj)
+            console.log("obj.__proto__ : ",obj.__proto__)
+            console.log("obj.__proto__.name : ",obj.__proto__.name) //  undefined
+            console.log("obj.__proto__.constructor : ",obj.__proto__.constructor) // Object() { [native code]}
+        }
+
+        // 构造函数
+        {
+            var obj1 = new Object({name:"Lili",y:13});
+            console.log(obj1); 
+            console.log(obj1.name); //Lili
+            console.log(obj1.__proto__.name); // undefined
+            console.log(obj1.__proto__.name === obj1.name); // false
+        }
+
+        // 内置方法 Object.create()
+        {
+            let obj2 = Object.create({color:"red",seed: "133km/h"})
+            console.log(obj2) // {}
+            console.log(obj2.__proto__)  // {color: "red", seed: "133km/h"}
+            console.log(obj2.color)  // red
+            console.log(obj2.__proto__.color )  // red
+            console.log(obj2.__proto__.color === obj2.color )  // true
+        }
+
+
+    </script>
+</body>
+</html>

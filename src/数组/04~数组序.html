@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组 数组爱旭</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">数组去重方法一：利用indexOf()</h3>
+            <pre class="code">
+            // 数组爱旭：
+            {
+                let arr = [3,5,6,7,8,1,4,3,1,5,1,7,8,9]
+                console.log(`原始数组长度 ： `,arr.length)
+                function uniqe(array){
+                    let newarr = [];
+                    for(let i = 0 ; i < array.length ; i++){
+                        if(newarr.indexOf(array[i]) === -1){
+                            newarr.push(array[i])
+                        }
+                    }
+                    return newarr;
+                }
+                console.log(`去重后的数组 ： `,uniqe(arr))
+                console.log(`去重后的数组的长度 ： `,uniqe(arr).length)
+            }  
+            </pre>
+        </section>
+    </div>
+
+
+    <script>
+        // 数组去重方法一：利用indexOf()
+        {
+            let arr = [3,5,6,7,8,1,4,3,1,5,1,7,8,9]
+            console.log(`原始数组长度 ： `,arr.length)
+            function uniqe(array){
+                let newarr = [];
+                for(let i = 0 ; i < array.length ; i++){
+                    if(newarr.indexOf(array[i]) === -1){
+                        newarr.push(array[i])
+                    }
+                }
+                return newarr;
+            }
+            console.log(`去重后的数组 ： `,uniqe(arr))
+            console.log(`去重后的数组的长度 ： `,uniqe(arr).length)
+        }
+
+
+    </script>
+</body>
+</html>

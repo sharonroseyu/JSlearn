@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象 ~ 数据拦截（数据劫持）</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">
+                数据拦截 利用对象内置方法（Object.defineProterty()）,设置属性,进而改变对象的属性值, es5 新增方法 ， 接受三个参数： 对象， 属性值，描述符(可选),数据属性 value writable configurable enumerable,访问器属性 set get
+            </h3>
+            <pre class="code">
+                {
+                    let obj = {
+                        name:"LUCY",
+                        age:12,
+                        sex: "gril",
+                        set height(m){
+                            obj.name = m;
+                        },
+                        get height(){
+                            return `172cm`
+                        }
+                    }
+        
+                    console.log(obj.height)  // 172cm invoke property getter
+                    obj.height = `露西`
+                    console.log(obj)  // {name: "露西", age: 12, sex: "gril"}
+                    console.log(obj.height) // 172cm
+                }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">
+                拦截对象的第一种情况
+            </h3>
+            <pre class="code">
+                {
+                    let obj = {name:'',age:'',sex:''  };
+                    let defaultName = ["张三","12","男性"];
+                    Object.keys(obj).forEach(key => {
+                        Object.defineProperty(obj, key, {
+                        get() {
+                            return defaultName;
+                        },
+                        set(value) {
+                            defaultName = value;
+                        }
+                        });
+                    });
+                    console.group()
+                    console.log(obj.name)
+                    console.log(obj.age)
+                    console.log(obj.sex)
+                    obj.name = `高湛`
+                    console.log(obj.name)
+                    console.log(obj.age)
+                    console.log(obj.sex)
+                    console.groupEnd()
+                }        
+            </pre>
+        </section>
+    </div>
+
+    <script>
+        // 定义:利用对象内置方法（Object.defineProterty()）,设置属性,进而改变对象的属性值
+        // es5 新增方法 ， 接受三个参数： 对象， 属性值，描述符(可选)
+        // 数据属性 value writable configurable enumerable
+        // 访问器属性 set get
+        {
+            let obj = {
+                name:"LUCY",
+                age:12,
+                sex: "gril",
+                set height(m){
+                    obj.name = m;
+                },
+                get height(){
+                    return `172cm`
+                }
+            }
+
+            console.log(obj.height)  // 172cm invoke property getter
+            obj.height = `露西`
+            console.log(obj)  // {name: "露西", age: 12, sex: "gril"}
+            console.log(obj.height) // 172cm
+        }
+
+
+        // 拦截对象的两种情况 
+        {
+            let obj = {name:'',age:'',sex:''  };
+            let defaultName = ["张三","12","男性"];
+            Object.keys(obj).forEach(key => {
+                Object.defineProperty(obj, key, {
+                get() {
+                    return defaultName;
+                },
+                set(value) {
+                    defaultName = value;
+                }
+                });
+            });
+            console.group()
+            console.log(obj.name)
+            console.log(obj.age)
+            console.log(obj.sex)
+            obj.name = `高湛`
+            console.log(obj.name)
+            console.log(obj.age)
+            console.log(obj.sex)
+            console.groupEnd()
+        }
+        
+        // 拦截对象 例子一
+        {
+            let obj = {name:'',age:'',sex:''  };
+            let defaultName = ["这是姓名默认值1","这是年龄默认值1","这是性别默认值1"];
+            Object.keys(obj).forEach(key => {
+                Object.defineProperty(obj, key, {
+                get() {
+                    return defaultName;
+                },
+                set(value) {
+                    defaultName = value;
+                }
+                });
+            });
+
+            console.log(obj.name);
+            console.log(obj.age);
+            console.log(obj.sex);
+            obj.name = "这是改变值1";
+            console.log(obj.name);
+            console.log(obj.age);
+            console.log(obj.sex);
+
+        }
+
+        // 拦截对象 例子二
+        {   
+            let obj = {name:'',age:'',sex:''  };
+            let defaultNameOne="这是默认值2";
+            Object.defineProperty(obj, 'name', {
+                get() {
+                    return defaultNameOne;
+                },
+                set(value) {
+                    defaultNameOne = value;
+                }
+            });
+            console.group("拦截对象 ： ")
+            console.log(obj.name);
+            console.groupEnd()
+            
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象拷贝 ~ 深拷贝</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">for 循环 函数递归 深拷贝</h3>
+            <pre class="code">
+                {
+                    var obj  = {
+                        userId : "10001",
+                        userName : "金十数据",
+                        hobby:["买外汇","买指数","买期货"],
+                        sayHello : ()=>{
+                            console.log(`hello , my  name is ${this.name}`)
+                        },
+                    }
+        
+                    function deepCopy(obj){
+                        // 判断复制的目标是数组还是对象
+                        const targetObj = obj.constructor === Array ? [] : {}; 
+                        for(let key in obj){
+                            if(obj.hasOwnProperty(key)){
+                                if(obj[key] && typeof obj[key] === "object" ){
+                                    targetObj[key] = obj[key].constructor === Array ? [] : {};
+                                    targetObj[key] = deepCopy(obj[key])
+                                }else{
+                                    targetObj[key] = obj[key]
+                                }   
+                            }
+                        }
+                        return targetObj;
+                    }
+                    let newOBJ = deepCopy(obj)
+                    console.group("深拷贝引用类型")
+                    console.log(newOBJ)
+                    newOBJ.userName = `拜伦财经`
+                    console.log(obj.userName)  // 金十数据
+                    console.log(newOBJ.userName) // 拜伦财经
+                    newOBJ.hobby[0] = `实时更新数据`
+                    console.log(obj.hobby)  //  ["买外汇", "买指数", "买期货"]
+                    console.log(newOBJ.hobby)  // ["实时更新数据", "买指数", "买期货"]
+                    console.groupEnd()
+                }
+            </pre>
+        </section>
+    </div>
+
+    <script>
+
+        {
+            var obj  = {
+                userId : "10001",
+                userName : "金十数据",
+                hobby:["买外汇","买指数","买期货"],
+                sayHello : ()=>{
+                    console.log(`hello , my  name is ${this.name}`)
+                },
+            }
+
+            function deepCopy(obj){
+                // 判断复制的目标是数组还是对象
+                const targetObj = obj.constructor === Array ? [] : {}; 
+                for(let key in obj){
+                    if(obj.hasOwnProperty(key)){
+                        if(obj[key] && typeof obj[key] === "object" ){
+                            targetObj[key] = obj[key].constructor === Array ? [] : {};
+                            targetObj[key] = deepCopy(obj[key])
+                        }else{
+                            targetObj[key] = obj[key]
+                        }   
+                    }
+                }
+                return targetObj;
+            }
+            let newOBJ = deepCopy(obj)
+            console.group("深拷贝引用类型")
+            console.log(newOBJ)
+            newOBJ.userName = `拜伦财经`
+            console.log(obj.userName)  // 金十数据
+            console.log(newOBJ.userName) // 拜伦财经
+            newOBJ.hobby[0] = `实时更新数据`
+            console.log(obj.hobby)  //  ["买外汇", "买指数", "买期货"]
+            console.log(newOBJ.hobby)  // ["实时更新数据", "买指数", "买期货"]
+            console.groupEnd()
+        }
+
+    </script>
+
+</body>
+</html>

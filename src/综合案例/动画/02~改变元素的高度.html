@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改变元素高度</title>
+    <style>
+        #box{
+            width:100px; height: 100px; background-color: #000; color: #ffffff; line-height: 100px; text-align: center;
+        }
+        #box2{
+            width:100px; height: 100px; background-color: orange; color: #ffffff; line-height: 100px; text-align: center;  position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">BOX</div>
+    <div id="box2">BOX2</div>
+    
+    <!-- 改变元素的高度 -->
+    <script>
+        var $box = document.querySelector("#box")
+
+        $box.onclick = function(){
+            var initHeight = parseInt(window.getComputedStyle($box,null).height);
+            console.log(`初始化高度 ： `,initHeight)
+            let timer = setInterval(()=>{
+                initHeight ++ ;
+                $box.style.height = initHeight + `px`
+                if(initHeight >= 200){
+                    initHeight = 200;
+                    clearInterval(timer)
+                }
+            })
+        }
+
+        // 封装以上的方法
+        /*
+        * tarDomele 需要进行动画的dom元素
+        * finishval 元素动画的目标值（完成动画时候的值）
+        * attr 元素动画的属性
+        */ 
+        function animate(tarDomele,finishval,attr){
+            console.log(`动画小红行了`)
+            console.log(tarDomele,finishval,attr)
+            console.log(parseInt(window.getComputedStyle(tarDomele,null)[attr]))
+            var initVal = parseInt(window.getComputedStyle(tarDomele,null)[attr])
+            console.log(`**** `, initVal)
+            let timer = setInterval(()=>{
+                initVal ++ ;
+                console.log(initVal)
+                tarDomele.style[attr] = initVal + `px`
+                
+                if(initVal >= parseInt(finishval)){
+                    initVal = finishval
+                    clearInterval(timer)
+                }
+            },10)
+        }
+
+        var $box2 = document.querySelector(`#box`)
+        box2.onclick = function(e){
+            animate(e.target,"200px","left")
+        }
+        
+    </script>
+</body>
+</html>

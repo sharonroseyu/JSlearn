@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">字面量方式创建数组 </h3>
+            <pre class="code">
+            {
+                let arr = ["viewport","meta","jinsh","viewport","set","meta"]
+                console.log(arr)
+                let arr1 = []
+                arr1[2] = 100
+                arr1[9] = 200
+                console.log(arr1) //  [empty × 2, 100, empty × 6, 200]
+            }  
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">new Array() 方式创建数组></a> </h3>
+            <pre class="code">
+            {
+                let arr = new Array("viewport","dott")
+                console.log(arr)
+                let arr1 = new Array(10)
+                console.log(arr1) // [empty × 10]
+                arr1[0] = 1;
+                arr[16]= 22
+                console.log(arr1)  // [1, empty × 9]
+            }
+            </pre>
+        </section>
+    </div>
+
+    <script>
+        {
+            let arr = ["viewport","meta","jinsh","viewport","set","meta"]
+            console.log(arr)
+            let arr1 = []
+            arr1[2] = 100
+            arr1[9] = 200
+            console.log(arr1) //  [empty × 2, 100, empty × 6, 200]
+        }
+
+        // new Array 方式创建数组
+        {
+            let arr = new Array("viewport","dott")
+            console.log(arr)
+            let arr1 = new Array(10)
+            console.log(arr1) // [empty × 10]
+            arr1[0] = 1;
+            arr[16]= 22
+            console.log(arr1)  // [1, empty × 9]
+        }
+    </script>
+</body>
+</html>

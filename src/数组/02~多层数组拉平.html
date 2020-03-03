@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> z数组 ~ 扁平化n维数组</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">
+                Array.flat(n)是ES10扁平数组的api,n表示维度,n值为Infinity时维度为无限大
+            </h3>
+            <pre class="code">
+            {
+                console.log(`数组扁平化 ： `, [1,[2,3]].flat(2))  // [1,2,3]
+                console.log(`数组扁平化 ： `, [10,[20,10,[40,20]]].flat(3))  // [10, 20, 10, 40, 20]
+                console.log(`数组扁平化 ： `, [10,[20,13,[14,35]]].toString() )  //  10,20,13,14,35
+            }        
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">计算数组的层级并将其拉平</h3>
+            <pre class="code">
+                打开控制台看代码
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">检查数组的某一项是否符合条件 [].every()</h3>
+            <pre class="code">
+            {
+                let arrs = [1,5,"title","div",100]
+                console.log("检测数组的每一项是否都为数字： ", arrs.every(item=>{return typeof item === "number"})) // false
+                let arrs1 = ["jinshi","li","title","div","history"]
+                console.log("检测数组的每一项是否都为字符串： ", arrs1.every(item=>{return typeof item === "string"})) // true
+            }
+            </pre>
+        </section>
+    </div>
+
+
+
+
+    <script>
+        // Array.flat(n)是ES10扁平数组的api,n表示维度,n值为Infinity时维度为无限大
+        {
+            console.group(`数组拉平`)
+            console.log(`数组扁平化 ： `, [1,[2,3]].flat(2))  // [1,2,3]
+            console.log(`数组扁平化 ： `, [10,[20,10,[40,20]]].flat(3))  // [10, 20, 10, 40, 20]
+            console.log(`数组扁平化 ： `, [10,[20,13,[14,35]]].toString() )  //  10,20,13,14,35
+            console.groupEnd()
+        }
+
+        // 求一个多维数组的维度数
+        {
+            var num = 1 ;
+            // function dimension(arrObj){
+            //     if(!arrObj || !(arrObj instanceof Array) ){
+            //         console.log(`数据不存在，或者这不是一个数组!!!`)
+            //         return;
+            //     }
+            //     console.log(`继续函数`,arrObj.length)
+            //     for (let i = 0; i < arrObj.length; i++) {
+            //         if(arrObj[i] instanceof Array){
+            //             num ++;
+            //             arrObj = arrObj[i]
+            //             dimension(arrObj)
+            //         } 
+            //     }  
+            //     return num;
+            // }
+
+            function dimension(arr){
+                for (i=0;i<arr.length;i++){
+                            if(arr[i] instanceof Array){
+                            num++;
+                            arr = arr[i];
+                            dimension(arr);
+                        }
+                    }
+                return num;
+            }
+                        
+            let arr = [100,["sec","div","li",[
+                111,{animal:[
+                    "小狗丹尼","小🐏苏西","大象艾米莉",[12,13,14]]},[20,[100,[399,12]]]
+                ]],200]
+            console.group(`多维数组：`)
+            console.log(arr.length)
+            console.log(`多维数组：` , dimension(arr))
+            console.log(arr.flat(dimension(arr))) // [100, "sec", "div", "li", 111, {…}, 20, 100, 399, 12, 200]
+            console.groupEnd()
+        }
+
+        {
+            let arrs = [1,5,"title","div",100]
+            console.log("检测数组的每一项是否都为数字： ", arrs.every(item=>{return typeof item === "number"})) // false
+            let arrs1 = ["jinshi","li","title","div","history"]
+            console.log("检测数组的每一项是否都为字符串： ", arrs1.every(item=>{return typeof item === "string"})) // true
+        }
+
+    </script>
+</body>
+</html>
