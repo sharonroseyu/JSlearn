@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归  递归初探</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">函数调用自身的编程技巧称之为递归(recursion) </h3>
+            <pre class="code">
+            // 递归之阶乘
+            {
+                function factorial(m){
+                    if(m === 1){
+                        return 1
+                    }else{
+                        return m * factorial(m-1)
+                    }
+                }
+                console.log(`10的阶乘 ： `,factorial(10)) // 3628800
+            }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">递归之斐波拉契数列</h3>
+            <pre class="code">
+            {
+                function fibonacci(n){
+                    if(n < 2){
+                        return n
+                    }else{
+                        return fibonacci(n-1) + fibonacci(n-2)
+                    }
+                }
+                console.log(`斐波拉契数列：`,fibonacci(10))
+                console.log(`斐波拉契数列：`,fibonacci(5))
+            }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">递归的三要素</h3>
+            <pre class="code">
+            // 递归的三要素
+            {
+                1. 清楚递归的功能
+                2. 寻找出递归结束的条件
+                3. 找出函数的等价关系公式 
+            }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">尾调用 指函数内部的最后一个动作是函数的调用，该调用的返回值，直接返回给函数</h3>
+            <pre class="code">
+            {
+                function fx1(){
+                    return fx2(10,29)
+                }
+                function fx2(m,n){
+                    return m+n;
+                }
+                console.log(`尾调用 ： `,fx1())  // 39
+    
+                // 非尾调用
+                function fx3(){
+                    return  fx2(10,21)+10
+                }
+                console.log(`非尾调用 ：`,fx3()) //  41
+            }
+            </pre>
+        </section>
+
+        <section class="sec">
+            <h3 class="title">把递归的函数改造成一个尾递归形式，可以避免创建比较多的执行上下文，如对阶乘函数的优化</h3>
+            <pre class="code">
+            {
+                function factorialOptimize(n,res){
+                    if(n === 1){
+                        return res;
+                    }else{
+                        return factorialOptimize(n-1,n*res)
+                    }
+                }
+                console.log(`尾递归 : `, factorialOptimize(10,1))   // 3628800
+            }
+            </pre>
+        </section>
+
+    </div>
+
+    <script>
+        // 递归之阶乘
+        {
+            function factorial(m){
+                if(m === 1){
+                    return 1
+                }else{
+                    return m * factorial(m-1)
+                }
+            }
+            console.log(`10的阶乘 ： `,factorial(10)) // 3628800
+        }
+
+        // 递归之斐波拉契数列
+        {
+            function fibonacci(n){
+                if(n<2){
+                    return n
+                }else{
+                    return fibonacci(n-1) + fibonacci(n-2)
+                }
+            }
+            console.log(`斐波拉契数列：`,fibonacci(10))
+            console.log(`斐波拉契数列：`,fibonacci(5))
+        }
+
+        // 递归的三要素
+        {
+            `1. 清楚递归的功能
+             2. 寻找出递归结束的条件
+             3. 找出函数的等价关系公式 
+            `
+        }
+
+        // 尾调用 指函数内部的最后一个动作是函数的调用，该调用的返回值，直接返回给函数
+        {
+            function fx1(){
+                return fx2(10,29)
+            }
+            function fx2(m,n){
+                return m + n;
+            }
+            console.log(`尾调用 ： `,fx1())  // 39
+
+            // 非尾调用
+            function fx3(){
+                return  fx2(10,21)+10
+            }
+            console.log(`非尾调用 ：`,fx3()) //  41
+        }
+
+        // 把递归的函数改造成一个尾递归形式，可以避免创建比较多的执行上下文，如对阶乘函数的优化
+        {
+            function factorialOptimize(n,res){
+                if(n === 1){
+                    return res;
+                }else{
+                    return factorialOptimize(n-1,n*res)
+                }
+            }
+            console.log(`尾递归 : `, factorialOptimize(10,1))   // 3628800
+        }
+    
+    </script>
+</body>
+</html>
