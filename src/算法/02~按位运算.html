@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算法 ~ 预热进制转换</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <section class="sec">
+            <h3 class="title">递归 数组扁平化之toString() 方法 </h3>
+            <pre class="code">
+            {
+                // 进制转换
+                // 将十进制转成八进制
+                console.log(`十进制转成八进制 ： `,(100).toString(8)) // 144
+                console.log(`十进制转成八进制 ： `,(9).toString(8))  // 11
+                console.log(`十进制转成八进制 ： `,(16).toString(8)) //  20
+        
+                // 将十进制转成二进制
+                console.log(`十进制转成二进制 ： `,(16).toString(2)) //  10000
+                console.log(`十进制转成二进制 ： `,(3).toString(2)) //  11
+        
+                // 将十进制转成十六进制 1 2 3 4 5 6 7 8 9 a b c  d  e  f
+                console.log(`十进制转成十六进制 ： `,(16).toString(16)) //  10
+                console.log(`十进制转成十六进制 ： `,(17).toString(16)) //  11
+                console.log(`十进制转成十六进制 ： `,(25).toString(16)) //  19
+        
+                // 将其他进制转成十进制
+                console.group(`其他制转成十进制`)
+                console.log(`二进制转成十进制 ： `, parseInt(10000,2)) //  10
+                console.log(`八进制转成十进制 ： `, parseInt(`110`,8)) //  72
+                console.log(`十六进制转成十进制 ： `, parseInt(`e`,16)) //  14
+                console.groupEnd()
+            }
+            </pre>
+        </section>
+    </div>
+
+    <script>
+    {
+        // 位元素
+        
+    }
+    </script>
+    
+</body>
+</html>
