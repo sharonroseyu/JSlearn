@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数柯里化</title>
+    <style>
+        *{
+            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        }
+        #root{
+            width: 800px; margin: 0 auto;
+        }
+        .sec .title{
+            font-weight: normal; margin: 10px 0 ;
+        }
+        .sec .code{
+            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <section class="sec">
+            <h3 class="title"> 熟悉 arguments 对象 他是一个类数组</h3>
+            <pre class="code">
+                {
+                    let fn = function(m,n){
+                        console.log("arguments : ", arguments)  //  [10, 20, 30, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+                        console.log("arguments.length : ", arguments.length)  // 3 获取的实参的个数
+                        console.log("typeof arguments : ", typeof arguments) // object
+                        console.log("arguments instanceof Object : ", arguments instanceof Object)  // true
+                        console.log("arguments instanceof Array : ", arguments instanceof Array) // false
+                        console.log("转数组 ： ", Array.from(arguments)) // [10, 20, 30]
+                        console.log("转数组 ： ", Array.prototype.slice.call(arguments)) // [10, 20, 30]
+                        console.log("转数组 ： ", [].slice.call(arguments))  // [10, 20, 30]
+                        return m+n;
+                    }
+                    fn(10,20,30)
+                }
+              
+            </pre>
+        </section>
+
+        
+    </div>
+
+    <script>
+        // arguments 对象 他是一个类数组
+        {
+            let fn = function(m,n){
+                console.group("arguments : ")
+                console.time()
+                console.log("arguments : ", arguments)  //  [10, 20, 30, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+                console.log("arguments.length : ", arguments.length)  // 3 获取的实参的个数
+                console.log("typeof arguments : ", typeof arguments) // object
+                console.log("arguments instanceof Object : ", arguments instanceof Object)  // true
+                console.log("arguments instanceof Array : ", arguments instanceof Array) // false
+                console.log("转数组 ： ", Array.from(arguments)) // [10, 20, 30]
+                console.log("转数组 ： ", Array.prototype.slice.call(arguments)) // [10, 20, 30]
+                console.log("转数组 ： ", [].slice.call(arguments))  // [10, 20, 30]
+                console.log("转数组 ： ", [...arguments])  // [10, 20, 30]
+                console.timeEnd()
+                console.groupEnd()
+                return m+n;
+            }
+            fn(10,20,30)
+        }
+      
+       // 实现下面一道面试题
+        /*
+        add(1)  // 1
+        add(1)(2) // 3
+        add(1)(2)(3)  // 6
+        add(1)(2,3)  // 6
+        add(1,2)(3)  // 6
+        add(1,2,3)  // 6
+        */ 
+        {
+            function add(){
+                // 把参数 arguments 转化为数组
+                var arrargs = Array.prototype.slice.call(arguments)
+                // var arrargs = Array.from(arguments)
+                // var arrargs = [...arguments]
+                console.log(`实参 ： `,arrargs)
+
+                let currie = function(){ // 因为 currie 函数里面使用arguments，所以 currie 不能使用箭头函数
+                    if(arguments.length === 0){
+                        return arrargs.reduce((a,b) => a+b)
+                    }else{
+                        arrargs.push(...arguments)
+                        return currie;
+                    }
+                }
+                return currie;
+            }
+            console.log(add(1)())
+        }
+       
+
+
+    </script>
+</body>
+</html>
