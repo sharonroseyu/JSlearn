@@ -1,0 +1,12 @@
+*{
+    padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+}
+#root{
+    width: 800px; margin: 0 auto;
+}
+.sec .title{
+    font-weight: normal; margin: 10px 0 ;
+}
+.sec .code{
+    background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+}
