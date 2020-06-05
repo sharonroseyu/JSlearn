@@ -22,7 +22,46 @@
 
     <script>
 
-        // 工厂模式
+        // 工厂模式 
+        {
+            function factoryObj(name,age){
+                var obj = {}
+                obj.name=name;
+                obj.age=age;
+                obj.say = function(val){
+                    console.log('我叫: '+this.name + val)
+                }
+                return obj
+            }
+
+            var p = factoryObj('张三',13)
+            console.log(p) 
+            p.say(' hello ')  // 我叫: 张三 hello 
+        }
+
+        // 构造函数模式
+        {
+            function Car(brand,system,color){
+                this.brand = brand;
+                this.system = system;
+                this.color = color;
+                this.call = function(){
+                    return '这是一辆' + this.brand + this.system + '车 , 的一辆很好的车。'
+                }
+            }
+
+            Car.prototype.speed = function(speed){
+                console.log('这辆'+this.brand+this.system + '的车的速度是：' + speed)
+            }
+
+            var bwm = new Car('宝马','5X','红色')
+            console.log(bwm)
+            console.log(bwm.call())
+            bwm.speed('200km/h')
+            console.log(bwm instanceof Car) // true
+        }
+
+
     </script>
 
 
