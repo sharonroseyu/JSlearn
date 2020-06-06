@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+    <title>TAB 切换</title>
+    <style>
+        *{
+            padding: 0; margin: 0;
+        }
+        li,ul,ol{list-style: none}
+        #app{
+            width: 600px;border: 1px solid #eee; margin: 0 auto;
+        }
+        .scroll{height:44px; overflow: hidden; border-bottom: 1px solid #eee;}
+        .top{
+            overflow: hidden;overflow-x: scroll; 
+        }
+        .tablist_wraper{
+            height: 56px; overflow: hidden;cursor: pointer;
+        }
+        .tablist_wraper .item{
+            float: left; padding: 0 20px; line-height: 44px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+        var $app = document.getElementById('app');
+        var device_width = document.documentElement.offsetWidth;
+        console.log('device_width: ', device_width)
+        var $top = document.createElement('div');
+        var $scroll = document.createElement('div');
+        $scroll.className='scroll';
+        $app.appendChild($scroll);
+        $scroll.append($top);
+        $top.className='top'
+        var tabbtn = {
+            code:0,
+            success:true,
+            data:[
+                {id:'101',type:'topic',title:'推荐'},
+                {id:'102',type:'hot',title:'热点'},
+                {id:'103',type:'society',title:'社会'},
+                {id:'104',type:'recreation',title:'娱乐'},
+                {id:'105',type:'topic',title:'科技'},
+                {id:'106',type:'topic',title:'汽车'},
+                {id:'107',type:'topic',title:'体育'},
+                {id:'108',type:'finance',title:'财经'},
+                {id:'109',type:'military',title:'军事'},
+                {id:'110',type:'international',title:'国际'}
+            ]
+        }
+        
+        var $tablist = document.createElement('ul');
+        $tablist.className='tablist_wraper'
+        $top.appendChild($tablist)
+
+        let request = function (){
+            return new Promise((res,rej)=>{
+                setTimeout(()=>{
+                res(tabbtn) 
+                },3000)
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded',createTab,false)
+
+        function createTab(){
+            getTabList()
+        }
+
+        async function getTabList(){
+            let res = await request()
+            console.log('获取到数据',res)
+            let $litabdom = ''
+            let len = res.data.length;
+            if(res.success){
+                res.data && res.data.forEach((e,idx)=>{
+                    let $tablidom = document.createElement('li');
+                    $tablidom.className="item";
+                    $tablidom.innerHTML = e.title;
+                    $tablist.appendChild($tablidom)
+                    console.log('$tablidom : ', $tablidom)
+                    var item_width = parseInt(getComputedStyle($tablidom).paddingLeft)+parseInt(getComputedStyle($tablidom).paddingRight)+parseInt(getComputedStyle($tablidom).width);
+                    console.log('item_width : ',item_width)
+                    $tablist.style.width = item_width*len+'px';
+                    $tablidom.addEventListener('click',function(){return selectTab(idx,e.id)},false);
+                })  
+            }
+        }
+
+
+        function selectTab(idx,id){
+            console.log('点击tabitem',idx,'id : ',id);
+            getSelectData(id)
+        }
+
+
+        // 获取对应的内容
+        function requestMain(id) {
+            return new Promise((res,rej)=>{
+                setTimeout(()=>{
+                    res({
+                        code:0,
+                        success:true,
+                        id:id,
+                        data:[
+                            {id:'1011',title:'"亲子鉴定儿子非亲生，男子想离婚却被法院驳回：你老婆是好人',content:'我有一个朋友是一名离婚律师，他经常会见识到各种各样奇葩的离婚理由。不光如此，法院还苦口婆心的劝告丈夫:“你的老婆是个好女人，这是你的问题”。'}
+                        ]
+                    })
+                },2000)
+            })
+        }
+        async function getSelectData(id){
+            console.log('选中的id ： ',id);
+            let res = await requestMain(id)
+            console.log('当前的卡片内容',res);
+        }
+        
+
+    </script>
+    
+</body>
+</html>
