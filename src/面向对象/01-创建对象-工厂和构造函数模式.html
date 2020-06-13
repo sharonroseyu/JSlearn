@@ -23,6 +23,39 @@
     <script>
 
         // 工厂模式
+        function createPerson(name,age,sex){
+            var obj = {
+                name,
+                age,
+                sex
+            }
+            return obj;
+        }
+
+        let p1 = createPerson('小红',12,'girl')
+        console.log('p1 : ',p1);
+        console.log('p1.__proto__ : ',p1.__proto__);
+        console.log('p1.__proto__.constructor : ',p1.__proto__.constructor);
+        console.log(createPerson.prototype)
+        console.log('createPerson.prototype.constructor : ',createPerson.prototype.constructor);
+        console.log(p1.__proto__.constructor === createPerson.prototype.constructor)  // false
+        console.log(p1 instanceof createPerson)  // false
+
+        // 构造函数
+        function Person (name,age,sex){
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+
+        let p2 = new Person('小强',123,'boy')
+        console.log('p2 : ',p2);
+        console.log(p2.__proto__)
+        console.log(p2.__proto__.constructor)
+        console.log(Person.prototype.constructor)
+        console.log(Person.prototype.constructor === p2.__proto__.constructor) // true
+        console.log(Person.prototype === p2.__proto__)  // true
+        console.log(Person === p2.__proto__.constructor)  // true
     </script>
 
 

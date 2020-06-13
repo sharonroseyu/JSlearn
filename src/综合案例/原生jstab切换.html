@@ -22,6 +22,9 @@
         .tablist_wraper .item{
             float: left; padding: 0 20px; line-height: 44px;
         }
+        .tablist_wraper .current{
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +37,7 @@
         console.log('device_width: ', device_width)
         var $top = document.createElement('div');
         var $scroll = document.createElement('div');
+        let selectIdx = 0;
         $scroll.className='scroll';
         $app.appendChild($scroll);
         $scroll.append($top);
@@ -78,6 +82,7 @@
             console.log('获取到数据',res)
             let $litabdom = ''
             let len = res.data.length;
+            
             if(res.success){
                 res.data && res.data.forEach((e,idx)=>{
                     let $tablidom = document.createElement('li');
@@ -86,7 +91,11 @@
                     $tablist.appendChild($tablidom)
                     console.log('$tablidom : ', $tablidom)
                     var item_width = parseInt(getComputedStyle($tablidom).paddingLeft)+parseInt(getComputedStyle($tablidom).paddingRight)+parseInt(getComputedStyle($tablidom).width);
-                    console.log('item_width : ',item_width)
+                    console.log('item_width : ',item_width);
+                    if(selectIdx === idx){
+                        console.log('hhhfdfh : ',$tablidom.classList)
+                        $tablidom.className="item current";
+                    }
                     $tablist.style.width = item_width*len+'px';
                     $tablidom.addEventListener('click',function(){return selectTab(idx,e.id)},false);
                 })  
@@ -96,6 +105,7 @@
 
         function selectTab(idx,id){
             console.log('点击tabitem',idx,'id : ',id);
+            selectIdx = idx
             getSelectData(id)
         }
 
