@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        class Person{
+            constructor(name,age,sex){
+                this.name = name;
+                this.age=age;
+                this.sex=sex
+            }
+        }
+
+        let p1 = new Person('小明',12,'boy');
+        console.log('p1 : ',p1);
+        console.log('Person.prototype : ',Person.prototype);
+        console.log('Person.prototype : ',Person.prototype.constructor);
+        console.log('p1.__proto__ : ',p1.__proto__.constructor);
+        console.log(Person.prototype.constructor === p1.__proto__.constructor)  // true
+
+        
+
+    </script>
+</body>
+</html>

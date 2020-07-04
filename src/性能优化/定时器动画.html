@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用定时器实现普通动画</title>
+    <style>
+        .box{
+            width: 100px; height: 100px;background-color: green; position: absolute; left: 0; top: 20px; right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">定时器动画</div>
+
+    <script type="text/javascript">
+        const $box = document.getElementsByClassName('box')[0];
+        console.log($box)
+        let i = 0 ; 
+        setInterval(() => {
+            i++;
+            $box.style.transform=`translateX(${i}px)`
+        }, 500);
+    </script>
+</body>
+</html>
