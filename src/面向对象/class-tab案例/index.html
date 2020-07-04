@@ -22,15 +22,19 @@
         }
         .first_nav ul li {
             float: left; border: 1px solid transparent; padding: 0 10px;cursor: pointer; border-right:1px solid #eee ;
+            position: relative;
         }
         .first_nav ul li.li_active{
             border-bottom: 1px solid #fff; background-color: #fff;height: 40px; box-sizing: border-box; color: orangered;
+        }
+        .first_nav ul li .iconfont{
+            position: absolute; top: 0; right:0; display: block;width: 16px; height: 16px; font-size: 12px; background-color: #ddd;line-height: 16px; text-align: center;  color: #fff;
         }
         #tab{
             width: 800px; height: 500px; border: 1px solid #eee; margin: 20px auto;
         }
         .tablist_box section{
-            display: none;height: 460px; text-align: center; line-height: 460px; font-size: 48px;
+            display: none;height: 460px; text-align: center; line-height: 460px; font-size: 24px;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;
         }
         .tablist_box section.con_active{
             display: block;
@@ -41,9 +45,9 @@
     <div class="tabs_box" id="tab">
         <nav class="first_nav">
             <ul>
-                <li class="li_active"><span>TAB -- 001</span class= "iconfont"><span></span></li>
-                <li><span>TAB -- 002</span class= "iconfont"><span></span></li>
-                <li><span>TAB -- 003</span class= "iconfont"><span></span></li>
+                <li class="li_active"><span>TAB -- 001</span><span  class= "iconfont">X</span></li>
+                <li><span>TAB -- 002</span><span  class= "iconfont">X</span></li>
+                <li><span>TAB -- 003</span><span  class= "iconfont">X</span></li>
             </ul>
             <div class="tab_add">
                 <span>+</span>

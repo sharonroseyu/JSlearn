@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>函数的定义和调用</title>
     <style>
-        *{
-            padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
         }
-        #root{
-            width: 800px; margin: 0 auto;
+
+        #root {
+            width: 800px;
+            margin: 0 auto;
         }
-        .sec .title{
-            font-weight: normal; margin: 10px 0 ;
+
+        .sec .title {
+            font-weight: normal;
+            margin: 10px 0;
         }
-        .sec .code{
-            background-color: #333; color:#ccc; padding-top: 10px; font-size: 12px; line-height: 1.8em; letter-spacing:1px;
+
+        .sec .code {
+            background-color: #333;
+            color: #ccc;
+            padding-top: 10px;
+            font-size: 12px;
+            line-height: 1.8em;
+            letter-spacing: 1px;
         }
     </style>
 </head>
+
 <body>
-    
+
     <div id="root">
         <section class="sec">
             <h3 class="title">函数声明式 </h3>
@@ -62,30 +76,31 @@
     <script>
         // 声明式
         {
-            function fn(m,n){
-                return m**n
+            function fn(m, n) {
+                return m ** n
             }
-            console.log(fn(12,3)) // 1728
+            console.log(fn(12, 3)) // 1728
         }
 
 
         // 函数表达式(匿名函数)
         {
-            var ff = function(m,n){
-                return m*n
+            var ff = function (m, n) {
+                return m * n
             }
-            console.log(ff(10,12)) // 120
+            console.log(ff(10, 12)) // 120
         }
 
         // new Function()  函数体放在最后，所有的参数都写成字符串形式
         {
-            let sum = new Function("m","n", "return m + n")
-            console.log(sum(22,21)) // 43
+            let sum = new Function("m", "n", "return m + n")
+            console.log(sum(22, 21)) // 43
         }
 
- 
+
 
 
     </script>
 </body>
+
 </html>

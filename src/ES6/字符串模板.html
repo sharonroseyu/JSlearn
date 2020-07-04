@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串模板</title>
+</head>
+
+<body>
+    <script>
+        let name = '张三';
+        let enName = 'Sanzhang';
+        console.log(tag`名字：${name}, 英文名${enName}。`);
+
+        function tag(strings, name, web) {
+            console.log(web)
+            console.log(strings)
+        }
+
+        let list = [
+            { title: '伊索寓言', author: '古希腊伊索' },
+            { title: 'javascript 高级程序设计', author: 'konw' },
+            { title: '阿贾克斯大好多', author: '大叔' },
+            { title: '仗剑走天涯', author: '大叔' },
+        ];
+
+        function template() {
+            return `<ul>
+                ${list.map((item) =>
+                `<li>作者${item.author}, 书名：${item.title}</li>`
+            ).join("")}
+            </ul>
+            `
+        }
+        document.body.innerHTML += template()
+
+    </script>
+</body>
+
+</html>
